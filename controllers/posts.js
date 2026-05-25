@@ -46,7 +46,12 @@ function destroy(request, response) {
         });
     }
 
-    response.json({
+    // Cerco l'indice del post
+    const postIndex = posts.findIndex(post => post.id === id);
+    // Elimino
+    posts.splice(postIndex, 1);
+
+    response.status(200).json({
         error: null,
         messaggio: `Richiesta di eliminazione per post con ID ${id}`,
         results: result.data
