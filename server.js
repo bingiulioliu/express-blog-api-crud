@@ -3,6 +3,8 @@ import postsRouter from './routers/posts.js'
 
 const app=express();
 
+app.use(express.json());
+
 const PORT= process.env.PORT;
 const URL= process.env.URL;
 
