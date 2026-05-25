@@ -2,7 +2,45 @@ import posts from "../data/posts.js";
 import { findPost } from "../utils/findPost.js";
 
 function index(request, response) {
-    response.json(posts)
+
+    // Parametri per la query string
+    const {
+        title,
+        maxPrepTime,
+        tag
+    } = request.query;
+
+    
+    // Filter unico
+    const filteredPosts = posts.filter(post => {
+        // Filtro prep time
+        const prepTimeReal = Number(maxPrepTime);
+        // Escludo i post con prep time non validi
+        if (!isNaN(prepTimeReal) && post.prep_time > prepTimeReal) {
+            return false;
+        }
+        // Filtro nome
+        if (title !== undefined && name !== '') {
+            const nameLower = name.toLowerCase();
+            const postNameLower = post.title.toLowerCase();
+
+            if (!postNameLower.includes(nameLower)) {
+                return false;
+            }
+        }
+        // Filtro tag
+        if (tag !== undefined && tag !== '') {
+            const tagLower = tag.toLowerCase();
+
+            const hasTag = post.tags.map(tag => tag.toLowerCase()).includes(tagLower);
+
+            if (!hasTag) {
+                return false;
+            }
+        }
+            return true;
+        })
+    response.status(200).json(filteredPosts);
 }
 
 function show(request, response) {
@@ -52,7 +90,7 @@ function destroy(request, response) {
     posts.splice(postIndex, 1);
 
     console.log(posts);
-    
+
     response.status(200).json({
         error: null,
         messaggio: `Richiesta di eliminazione per post con ID ${id}`,
