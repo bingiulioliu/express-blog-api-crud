@@ -4,6 +4,7 @@ export const findPost = (posts, id) => {
     // Se non è un numero intero
     if (isNaN(realId)) {
         return {
+            status: 400,
             error: 'ID non corretto',
             result: null
         };
@@ -11,6 +12,7 @@ export const findPost = (posts, id) => {
 
     if (realId <= 0) {
         return {
+            status: 400,
             error: 'ID minore di 0',
             result: null
         };
@@ -18,6 +20,7 @@ export const findPost = (posts, id) => {
 
     if (realId > 5) {
         return {
+            status: 404,
             error: 'Post non ancora creato',
             result: null
         };
@@ -27,6 +30,7 @@ export const findPost = (posts, id) => {
 
     if (!postFound) {
         return {
+            status: 404,
             error: 'Post non trovato',
             result: null
         };

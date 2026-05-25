@@ -38,13 +38,15 @@ function destroy(request, response) {
     const result = findPost(posts, id)
 
     if (result.error) {
-        return response.status(404).json({
+        return response.status(result.status).json({
+            status: result.status,
             error: result.error,
             results: null
         });
     }
 
     response.json({
+        status: result.status,
         error: null,
         messaggio: `Richiesta di eliminazione per post con ID ${id}`,
         results: result.data
