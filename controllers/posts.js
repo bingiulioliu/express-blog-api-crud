@@ -47,10 +47,12 @@ function destroy(request, response) {
     }
 
     // Cerco l'indice del post
-    const postIndex = posts.findIndex(post => post.id === id);
+    const postIndex = posts.findIndex(post => post.id === Number(id));
     // Elimino
     posts.splice(postIndex, 1);
 
+    console.log(posts);
+    
     response.status(200).json({
         error: null,
         messaggio: `Richiesta di eliminazione per post con ID ${id}`,
