@@ -1,4 +1,5 @@
 import posts from "../data/posts.js";
+import { createPost } from "../utils/createPost.js";
 import { findPost } from "../utils/findPost.js";
 
 function index(request, response) {
@@ -66,11 +67,25 @@ function show(request, response) {
 }
 
 function create(request, response) {
+    
+    const result = createPost(posts, request.body);
 
+    if (result.error){
+        return response.status(result.status).json({
+            status: result.status,
+            error: result.error,
+            results: null
+        });
+    }
 
-    response.json({
-        messaggio: 'Richiesta di creazione'
-    })
+    posts.push(result.data);
+    console.log(posts);
+    
+    response.status(result.status).json({
+        error: null,
+        messaggio: 'Richiesta di creazione',
+        results: result.data
+    });
 }
 
 function destroy(request, response) {
