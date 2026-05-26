@@ -90,9 +90,9 @@ function create(request, response) {
 }
 
 function destroy(request, response) {
-    const { id } = request.params;
+    const { slug } = request.params;
 
-    const result = findPost(posts, id)
+    const result = findBySlug(posts, slug)
 
     if (result.error) {
         return response.status(result.status).json({
@@ -111,16 +111,15 @@ function destroy(request, response) {
 
     response.status(200).json({
         error: null,
-        messaggio: `Richiesta di eliminazione per post con ID ${id}`,
+        messaggio: `Richiesta di eliminazione per post con slug ${slug}`,
         results: result.data
     })
 }
 
 function modify(request, response){
-    const {id} = request.params;
-    const idReal=Number(id);
+    const {slug} = request.params;
 
-    const result = findPost(posts, id);
+    const result = findBySlug(posts, slug);
 
     if (result.error) {
         return response.status(result.status).json({
@@ -150,7 +149,7 @@ function modify(request, response){
 
     response.status(200).json({
         error: null,
-        messaggio: `Richiesta di modifica per post con ID ${id}`,
+        messaggio: `Richiesta di modifica per post con slug ${slug}`,
         results: updPost
     })
 }

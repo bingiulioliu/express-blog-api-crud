@@ -13,10 +13,10 @@ router.get('/:slug', show);
 router.post('/', create)
 
 // PATCH
-router.patch('/:id', modify)
+router.patch('/:slug', modify)
 
 // DELETE
-router.delete('/:id', destroy)
+router.delete('/:slug', destroy)
 
 
 export default router
