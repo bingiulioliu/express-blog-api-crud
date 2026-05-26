@@ -100,7 +100,11 @@ function destroy(request, response) {
     })
 }
 
+function modify(request, response){
+
+}
+
 
 export {
-    index, show, create, destroy
+    index, show, create, destroy, modify
 }
