@@ -116,7 +116,43 @@ function destroy(request, response) {
 }
 
 function modify(request, response){
+    const {id} = request.params;
+    const idReal=Number(id);
 
+    const result = findPost(posts, id);
+
+    if (result.error) {
+        return response.status(result.status).json({
+            status: result.status,
+            error: result.error,
+            results: null
+        });
+    }
+
+    const originalPost = result.data;
+
+    const updPost = {
+        ...originalPost,
+        ...request.body,
+        id: idReal
+    };
+
+    console.log(updPost);
+    
+
+    const postIndex = posts.findIndex(post => post.id === Number(id));
+    // Elimino
+    posts.splice(postIndex, 1, updPost);
+
+    console.log(posts);
+    
+
+
+    response.status(200).json({
+        error: null,
+        messaggio: `Richiesta di modifica per post con ID ${id}`,
+        results: updPost
+    })
 }
 
 
