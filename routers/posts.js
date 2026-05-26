@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', index)
 
 // SHOW hhtp://localhost:5555/posts/1
-router.get('/:id', show);
+router.get('/:slug', show);
 
 // CREATE
 router.post('/', create)

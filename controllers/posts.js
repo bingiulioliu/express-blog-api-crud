@@ -1,5 +1,6 @@
 import posts from "../data/posts.js";
 import { createPost } from "../utils/createPost.js";
+import { findBySlug } from "../utils/findBySlug.js";
 import { findPost } from "../utils/findPost.js";
 
 function index(request, response) {
@@ -46,9 +47,9 @@ function index(request, response) {
 
 function show(request, response) {
     // Recuper l'ID dai params
-    const { id } = request.params;
+    const {slug} = request.params;
 
-    const result = findPost(posts, id)
+    const result = findBySlug(posts, slug)
 
     if (result.error) {
         return response.status(result.status).json({
@@ -60,7 +61,7 @@ function show(request, response) {
 
     response.json({
         error: null,
-        messaggio: `Stai visualizzando il post con ID ${id}`,
+        messaggio: `Stai visualizzando il post slug ${slug}`,
         results: result.data,
     });
 
@@ -139,7 +140,6 @@ function modify(request, response){
 
     console.log(updPost);
     
-
     const postIndex = posts.findIndex(post => post.id === Number(id));
     // Elimino
     posts.splice(postIndex, 1, updPost);
