@@ -92,7 +92,9 @@ function create(request, response) {
 function destroy(request, response) {
     const { slug } = request.params;
 
-    const result = findBySlug(posts, slug)
+    const realSlug = slug.toLowerCase();
+
+    const result = findBySlug(posts, realSlug)
 
     if (result.error) {
         return response.status(result.status).json({
@@ -103,7 +105,7 @@ function destroy(request, response) {
     }
 
     // Cerco l'indice del post
-    const postIndex = posts.findIndex(post => post.id === Number(id));
+    const postIndex = posts.findIndex(post => post.slug === realSlug);
     // Elimino
     posts.splice(postIndex, 1);
 
@@ -111,14 +113,14 @@ function destroy(request, response) {
 
     response.status(200).json({
         error: null,
-        messaggio: `Richiesta di eliminazione per post con slug ${slug}`,
+        messaggio: `Richiesta di eliminazione per post con slug ${realSlug}`,
         results: result.data
     })
 }
 
 function modify(request, response){
     const {slug} = request.params;
-
+    const realSlug = slug.toLowerCase();
     const result = findBySlug(posts, slug);
 
     if (result.error) {
@@ -134,12 +136,11 @@ function modify(request, response){
     const updPost = {
         ...originalPost,
         ...request.body,
-        id: idReal
     };
 
     console.log(updPost);
     
-    const postIndex = posts.findIndex(post => post.id === Number(id));
+    const postIndex = posts.findIndex(post => post.slug === realSlug);
     // Elimino
     posts.splice(postIndex, 1, updPost);
 
