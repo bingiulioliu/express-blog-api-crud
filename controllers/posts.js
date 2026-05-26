@@ -66,6 +66,8 @@ function show(request, response) {
 }
 
 function create(request, response) {
+
+
     response.json({
         messaggio: 'Richiesta di creazione'
     })
