@@ -3,6 +3,7 @@ import {index, show, create, destroy, modify} from '../controllers/posts.js';
 import findSlug from '../middlewares/findSlug.js';
 import obliterateBySlug from '../middlewares/obliterateBySlug.js';
 import createNewPost from '../middlewares/createNewPost.js';
+import modifyPost from '../middlewares/modifyPost.js';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get('/:slug',findSlug, show);
 router.post('/', createNewPost, create)
 
 // PATCH
-router.patch('/:slug',findSlug, modify)
+router.patch('/:slug',findSlug, modifyPost, modify)
 
 // DELETE
 router.delete('/:slug', findSlug, obliterateBySlug, destroy)

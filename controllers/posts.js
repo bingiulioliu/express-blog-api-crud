@@ -88,36 +88,12 @@ function destroy(request, response) {
 }
 
 function modify(request, response){
-    const {slug} = request.params;
-    const realSlug = slug.toLowerCase();
-    const result = findBySlug(posts, slug);
+    const {slug} = request.postFind;
 
-    if (result.error) {
-        return response.status(result.status).json({
-            status: result.status,
-            error: result.error,
-            results: null
-        });
-    }
+    // Recupero l'oggetto salvato in modifyPost
+    const {updPost} = request
 
-    const originalPost = result.data;
-
-    const updPost = {
-        ...originalPost,
-        ...request.body,
-    };
-
-    console.log(updPost);
-    
-    const postIndex = posts.findIndex(post => post.slug === realSlug);
-    // Elimino
-    posts.splice(postIndex, 1, updPost);
-
-    console.log(posts);
-    
-
-
-    response.status(200).json({
+    response.json({
         error: null,
         messaggio: `Richiesta di modifica per post con slug ${slug}`,
         results: updPost
