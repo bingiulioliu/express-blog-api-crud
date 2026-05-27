@@ -1,8 +1,6 @@
 import posts from "../data/posts.js";
 import findSlug from "../middlewares/findSlug.js";
-import { createPost } from "../utils/createPost.js";
-import { findBySlug } from "../utils/findBySlug.js";
-import { findPost } from "../utils/findPost.js";
+
 
 function index(request, response) {
 

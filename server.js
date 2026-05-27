@@ -1,5 +1,6 @@
 import express from 'express';
 import postsRouter from './routers/posts.js'
+import notFound from './middlewares/notFound.js';
 
 const app=express();
 
@@ -9,7 +10,8 @@ const PORT= process.env.PORT;
 const URL= process.env.URL;
 
 app.use('/posts', postsRouter);
-
+// Not found
+app.use(notFound);
 
 app.listen(PORT, (error) => {
     if(error) {
