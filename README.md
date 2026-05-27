@@ -98,4 +98,27 @@ A scelta tra:
 - Implementazione delle chiamate tramite slug (al posto di id)
 - Implementazione della soft-delete (tramite flag). Potete utilizzare una chiave già presente oppure aggiungerne una specifica per questo scopo (deleted) 
 
-Buon Lavoro e buon divertimento
+## parte 3
+
+esercizio di oggi: Express Blog - Middlewares
+
+repo: `express-blog-api-crud`  (sempre la stessa)
+
+## Esercizio
+
+**Milestone 1**
+Dopo aver completato tutte le operazioni CRUD, completiamo le nostre API inserendo un middleware per la gestione delle rotte non registrate e uno per la gestione degli errori.
+
+- Se viene chiamato un endpoint inesistente, un middleware dovrà rispondere un messaggio e uno status appropriato.
+- Se viene generato un errore, un middleware si occuperà di rispondere con un messaggio e uno status appropriato.
+
+**Milestone 2**
+Aggiungere
+- Un middleware per semplificare le rotte con parametro id/slug.
+o
+- Un middleware per semplificare la validazione dello rotte create/put/patch
+
+## Bonus
+Abbiamo visto come creare con *langchain* un agente 🤖 .
+Creiamo qualche tool e testiamo l'utilizzo con claude (sbizzarritevi pure quanto volete).
+Guardate pure l'esempio che è nel repo (il solito) per aiutarvi
