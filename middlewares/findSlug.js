@@ -5,7 +5,7 @@ function findSlug (request, response, next) {
     const {slug} = request.params;
 
     const postFind = posts.find(post => {
-        post.slug === slug;
+        return post.slug === slug;
     });
 
     // Gestione dell'errore
@@ -14,6 +14,7 @@ function findSlug (request, response, next) {
             error: 'Post non trovato',
             results: null
         });
+        return
     }
 
     // Passaggio di dati e continuazione

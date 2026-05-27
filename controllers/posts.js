@@ -1,4 +1,5 @@
 import posts from "../data/posts.js";
+import findSlug from "../middlewares/findSlug.js";
 import { createPost } from "../utils/createPost.js";
 import { findBySlug } from "../utils/findBySlug.js";
 import { findPost } from "../utils/findPost.js";
@@ -47,22 +48,15 @@ function index(request, response) {
 
 function show(request, response) {
     // Recuper l'ID dai params
-    const {slug} = request.params;
 
-    const result = findBySlug(posts, slug)
-
-    if (result.error) {
-        return response.status(result.status).json({
-            status: result.status,
-            error: result.error,
-            results: null
-        });
-    }
+    const { slug, ...altro } = request.postFind;
 
     response.json({
         error: null,
-        messaggio: `Stai visualizzando il post slug ${slug}`,
-        results: result.data,
+        messaggio: `Stai visualizzando il post `,
+        results: {
+            ...altro
+        }
     });
 
 }
