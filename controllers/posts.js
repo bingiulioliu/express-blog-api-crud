@@ -53,7 +53,7 @@ function show(request, response) {
 
     response.json({
         error: null,
-        messaggio: `Stai visualizzando il post `,
+        messaggio: `Stai visualizzando il post con slug ${slug}`,
         results: {
             ...altro
         }
@@ -84,32 +84,16 @@ function create(request, response) {
 }
 
 function destroy(request, response) {
-    const { slug } = request.params;
+    const {slug, ...altro} = request.postFind;
 
-    const realSlug = slug.toLowerCase();
 
-    const result = findBySlug(posts, realSlug)
-
-    if (result.error) {
-        return response.status(result.status).json({
-            status: result.status,
-            error: result.error,
-            results: null
-        });
-    }
-
-    // Cerco l'indice del post
-    const postIndex = posts.findIndex(post => post.slug === realSlug);
-    // Elimino
-    posts.splice(postIndex, 1);
-
-    console.log(posts);
-
-    response.status(200).json({
+    response.json({
         error: null,
-        messaggio: `Richiesta di eliminazione per post con slug ${realSlug}`,
-        results: result.data
-    })
+        messaggio: `Stai eliminando il post con slug ${slug}`,
+        results: {
+            ...altro
+        }
+    });
 }
 
 function modify(request, response){

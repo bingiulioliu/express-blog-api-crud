@@ -1,6 +1,7 @@
 import express from 'express';
 import {index, show, create, destroy, modify} from '../controllers/posts.js'
 import findSlug from '../middlewares/findSlug.js'
+import obliterateBySlug from '../middlewares/obliterateBySlug.js'
 const router = express.Router();
 
 // INDEX hhtp://localhost:5555/posts
@@ -16,7 +17,8 @@ router.post('/', create)
 router.patch('/:slug',findSlug, modify)
 
 // DELETE
-router.delete('/:slug', findSlug, destroy)
-
+router.delete('/:slug', findSlug, obliterateBySlug, destroy)
 
 export default router
+
+
