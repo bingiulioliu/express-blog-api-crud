@@ -18,7 +18,7 @@ export const createPost = (postArray, obj) =>{
     if (slugExists){
         return {
             status: 400,
-            error: 'Titolo/slug giá presenti',
+            error: 'Titolo/slug già presenti',
             result: null
         };
     }

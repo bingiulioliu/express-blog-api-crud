@@ -63,29 +63,20 @@ function show(request, response) {
 
 function create(request, response) {
     
-    const result = createPost(posts, request.body);
+    const { slug, ...altro } = request.body;
 
-    if (result.error){
-        return response.status(result.status).json({
-            status: result.status,
-            error: result.error,
-            results: null
-        });
-    }
-
-    posts.push(result.data);
-    console.log(posts);
-    
-    response.status(result.status).json({
+    response.json({
         error: null,
-        messaggio: 'Richiesta di creazione',
-        results: result.data
+        messaggio: `Hai creato il post con slug ${slug}`,
+        results: {
+            slug,
+            ...altro
+        }
     });
 }
 
 function destroy(request, response) {
     const {slug, ...altro} = request.postFind;
-
 
     response.json({
         error: null,
